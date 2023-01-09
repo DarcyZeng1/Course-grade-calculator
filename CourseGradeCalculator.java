@@ -4,7 +4,7 @@
 
 import java.util.*;
 
-public class CourseGradeCalculator{
+public class CourseGradeCalculator extends ValidInput{
 
     //List of String that save the list of grade item
     List<String> gradingList;
@@ -12,6 +12,8 @@ public class CourseGradeCalculator{
     double[] fraction;
     //double array that stores the percentage of grade achieved
     double[] grade;
+    //boolean that shows if the imput is valid.
+    boolean validInput = true;
     
     //function that asks the user to enter input
     public void input(){
@@ -28,13 +30,19 @@ public class CourseGradeCalculator{
         }
 
         this.fraction = new double[gradingList.size()];
-        int inputGrade;
+        double inputGrade;
         System.out.println("Enter the weight of each gradinf factores in percentage (Example:Exam is 50% of overall, therefore enter 50)");
         
         //Ask the user to input the weight of each gradeing item in percent.
         for(int i=0;i<gradingList.size();i++){
-            System.out.println("weight for" + gradingList.get(i) + ":");
-            inputGrade = Integer.valueOf(scan.nextLine());
+            System.out.println("weight for " + gradingList.get(i) + ":");
+            input = scan.nextLine();
+            validInput = checkValidility(input);
+            while(!validInput){
+                input = scan.nextLine();
+                validInput = checkValidility(input);
+            }
+            inputGrade = Double.valueOf(input);
             fraction[i] = inputGrade;
         }
 
@@ -45,7 +53,13 @@ public class CourseGradeCalculator{
         //Ask the user to enter the achived grade in percentage.
         for(int i=0;i<gradingList.size();i++){
             System.out.println("grade for " + gradingList.get(i) + ":");
-            receivedGrade = Double.valueOf(scan.nextLine());
+            input = scan.nextLine();
+            validInput = checkValidility(input);
+            while(!validInput){
+                input = scan.nextLine();
+                validInput = checkValidility(input);
+            }
+            receivedGrade = Double.valueOf(input);
             grade[i] = receivedGrade;
 
         }
